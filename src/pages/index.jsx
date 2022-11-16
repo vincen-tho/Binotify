@@ -1,9 +1,7 @@
+import LoginPage from "@/pages/login";
+
 const HomePage = () => {
-  return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Home Page</h1>
-    </div>
-  );
+  return <LoginPage />;
 };
 
 export default HomePage;
