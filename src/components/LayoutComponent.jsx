@@ -1,10 +1,14 @@
 import { Avatar, Button, Layout, Menu, Tooltip } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const { Header, Content, Sider } = Layout;
 
 const LayoutComponent = (props) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Header
@@ -19,10 +23,10 @@ const LayoutComponent = (props) => {
           <div className="flex">
             <div className="bg-yellow-600 px-4">Binotify Premium</div>
             <div className="flex flex-col items-start ml-4">
-              <p className="mx-4 my-0 leading-normal">Elun Mask</p>
-              <p className="mx-4 my-0 leading-normal">
+              <p className="mx-4 my-0 leading-normal">Name: {user?.name}</p>
+              <p className="mx-4 my-0 leading-normal font-semibold">
                 <span className="font-semibold">ROLE: </span>
-                Penyanyi
+                {user.isAdmin ? "Admin" : "Penyanyi"}
               </p>
             </div>
           </div>
