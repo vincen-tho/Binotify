@@ -24,9 +24,10 @@ const RegisterPage = () => {
         const response = await postRegister(values);
         setAuth({
           isAuth: true,
-          user: response.user,
         });
-        navigate("/subscription");
+        localStorage.setItem("user", JSON.stringify(response.user));
+        localStorage.setItem("token", response.token);
+        navigate("/songs");
       } catch (error) {
         console.log(error);
         notification.error({

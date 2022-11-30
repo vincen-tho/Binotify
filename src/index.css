@@ -2,7 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  margin: 0;
+  font-family: "Fira Sans", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ant-btn:hover {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+  color: black !important;
+  border: #fff;
+}
+
 .ant-btn-primary {
   background-color: rgb(220, 157, 0) !important;
-  border: #a70000 !important;
+  border: #fff !important;
+}
+
+.ant-btn-primary:hover {
+  background-color: rgb(220, 157, 0) !important;
+  border: #fff !important;
+}
+
+.ant-btn-danger {
+  background-color: #cb0e0ef5 !important;
+  border: #fff !important;
+}
+
+.ant-btn-green {
+  background-color: #24ac1df5 !important;
+  color: #fff !important;
 }

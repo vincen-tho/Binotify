@@ -20,7 +20,10 @@ const LoginPage = () => {
         isAuth: true,
       });
       localStorage.setItem("user", JSON.stringify(response.user));
-      navigate("/subscription");
+      localStorage.setItem("token", response.token);
+      response.user.isAdmin == "true"
+        ? navigate("/subscription")
+        : navigate("/songs");
     } catch (error) {
       console.log(error);
       notification.error({
