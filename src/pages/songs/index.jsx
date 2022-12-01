@@ -26,22 +26,32 @@ const SongsPage = () => {
   }, []);
 
   const handleAdd = (payload) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       createSong(payload)
-        .then(() => {
-          fetchSongsData();
-          notification.success({
-            message: "Success",
-            description: "Song added successfully",
-          });
-          resolve();
+        .then((res) => {
+          console.log(res);
+          if (!res) {
+            notification.error({
+              message: "Error",
+              description:
+                "Failed to add song (Make sure file type is correct)",
+            });
+            reject();
+          } else {
+            fetchSongsData();
+            notification.success({
+              message: "Success",
+              description: "Song added successfully",
+            });
+            resolve();
+          }
         })
         .catch((err) => {
           notification.error({
             message: "Error",
             description: err,
           });
-          reject();
+          reject(err);
         });
     });
   };
@@ -49,13 +59,21 @@ const SongsPage = () => {
   const handleEdit = (key, payload) => {
     return new Promise((resolve, reject) => {
       updateSong(key, payload)
-        .then(() => {
-          fetchSongsData();
-          notification.success({
-            message: "Success",
-            description: "Song updated successfully",
-          });
-          resolve();
+        .then((res) => {
+          if (!res) {
+            notification.error({
+              message: "Error",
+              description: "Failed to edit song",
+            });
+            reject();
+          } else {
+            fetchSongsData();
+            notification.success({
+              message: "Success",
+              description: "Song updated successfully",
+            });
+            resolve();
+          }
         })
         .catch((err) => {
           notification.error({
@@ -70,13 +88,21 @@ const SongsPage = () => {
   const handleDelete = (key) => {
     return new Promise((resolve, reject) => {
       deleteSong(key)
-        .then(() => {
-          fetchSongsData();
-          notification.success({
-            message: "Success",
-            description: "Song has been deleted",
-          });
-          resolve();
+        .then((res) => {
+          if (!res) {
+            notification.error({
+              message: "Error",
+              description: "Failed to delete song",
+            });
+            reject();
+          } else {
+            fetchSongsData();
+            notification.success({
+              message: "Success",
+              description: "Song has been deleted",
+            });
+            resolve();
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -94,7 +120,7 @@ const SongsPage = () => {
     return {
       key: song.song_id,
       songTitle: song.Judul,
-      songArtist: song.penyanyi_id,
+      songArtist: song["user.name"],
     };
   });
 

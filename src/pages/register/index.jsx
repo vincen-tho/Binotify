@@ -81,7 +81,11 @@ const RegisterPage = () => {
                 <Form.Item
                   name="email"
                   rules={[
-                    { required: true, message: "Please input your email!" },
+                    {
+                      required: true,
+                      type: "email",
+                      message: "Please input your email!",
+                    },
                   ]}
                 >
                   <Input />
@@ -98,8 +102,22 @@ const RegisterPage = () => {
                 Confirm Password
                 <Form.Item
                   name="confirm_password"
+                  dependencies={["password"]}
+                  hasFeedback
                   rules={[
                     { required: true, message: "Please input your password!" },
+                    ({ getFieldValue }) => ({
+                      validator(_, value) {
+                        if (!value || getFieldValue("password") === value) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(
+                          new Error(
+                            "The two passwords that you entered do not match!"
+                          )
+                        );
+                      },
+                    }),
                   ]}
                 >
                   <Input.Password />

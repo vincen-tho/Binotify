@@ -39,7 +39,7 @@ const AddSong = ({ handleAdd }) => {
 
   return (
     <>
-      <Button type="green" className="mr-12" onClick={showModal}>
+      <Button type="green" onClick={showModal}>
         Add Song
       </Button>
 
@@ -65,7 +65,7 @@ const AddSong = ({ handleAdd }) => {
               }}
             />
           </Form.Item>
-          Song File
+          Song File (.mp3/.mpeg)
           <input
             id="songFile"
             type="file"

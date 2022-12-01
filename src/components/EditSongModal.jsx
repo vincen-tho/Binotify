@@ -72,7 +72,7 @@ const EditSong = ({ dataRow, handleEdit }) => {
             required
           />
         </Form>
-        <h1 className="flex justify-end mt-4 text-red-500">
+        <h1 className="flex justify-end mt-4 text-red-500 text-sm">
           Song file can be left empty to not update
         </h1>
       </Modal>

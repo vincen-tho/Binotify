@@ -1,43 +1,62 @@
 import withProtectedPage from "@/components/withProtectedPage";
 import { Table, Space, Button, notification } from "antd";
+import { fetchSubscriptions, postSubscriptions } from "@/services/subscription";
+import React, { useState, useEffect } from "react";
+import { ReloadOutlined } from "@ant-design/icons";
 
 const SubscriptionPage = () => {
-  const handleAccept = () => {};
+  const [subscription, setSubscription] = useState([]);
 
-  const handleDecline = () => {};
+  const fetchSubscriptionData = async () => {
+    const response = await fetchSubscriptions();
+    setSubscription(response);
+  };
 
-  // const dataSource = (data || []).map((song) => {
-  //   return {
-  //     key: song.song_id,
-  //     songTitle: song.Judul,
-  //     songArtist: song.penyanyi_id,
-  //   };
-  // });
+  const handleClick = async (record, approve) => {
+    const payload = {
+      approve: approve,
+      subscriber_id: record.subscriber_id,
+      creator_id: record.creator_id,
+    };
+    try {
+      const response = await postSubscriptions(payload);
+      notification.success({
+        message: "Success",
+        description: "Subscription updated successfully",
+      });
+      fetchSubscriptionData();
+    } catch (err) {
+      console.log(err);
+      notification.error({
+        message: "Error",
+        description: "Failed to update subscription",
+      });
+    }
+  };
 
-  const dataSource = [
-    {
-      key: "1",
-      songTitle: "John Brown",
-      songArtist: 32,
-    },
-    {
-      key: "2",
-      songTitle: "Jim Green",
-      songArtist: 42,
-    },
-    {
-      key: "3",
-      songTitle: "Joe Black",
-      songArtist: 32,
-    },
-  ];
+  useEffect(() => {
+    fetchSubscriptionData();
+  }, []);
+  const data = subscription && subscription.data?.subscriptionList;
+
+  const dataSource = (data || []).map((subData) => {
+    return {
+      key: subData.creator_id + "-" + subData.subscriber_id,
+      creator_id: subData.creator_id,
+      subscriber_id: subData.subscriber_id,
+    };
+  });
 
   const columns = [
     {
-      title: "Username",
-      dataIndex: "songTitle",
-      key: "songTitle",
-      sorter: (a, b) => a.songTitle.localeCompare(b.songTitle),
+      title: "Creator name",
+      dataIndex: "creator_id",
+      key: "creator_id",
+    },
+    {
+      title: "Subscriber name",
+      dataIndex: "subscriber_id",
+      key: "subscriber_id",
     },
     {
       title: "ACTIONS",
@@ -47,10 +66,10 @@ const SubscriptionPage = () => {
       width: "200px",
       render: (_, record) => (
         <div className="flex justify-evenly">
-          <Button type="primary" onClick={handleAccept}>
+          <Button type="primary" onClick={() => handleClick(record, "true")}>
             Accept
           </Button>
-          <Button type="danger" onClick={handleDecline}>
+          <Button type="danger" onClick={() => handleClick(record, "false")}>
             Decline
           </Button>
         </div>
@@ -62,6 +81,10 @@ const SubscriptionPage = () => {
     <div className="px-14 py-4">
       <div className="flex justify-between">
         <h1 className="text-3xl font-bold">Subscription Management </h1>
+        <Button type="green" onClick={() => fetchSubscriptionData()}>
+          <ReloadOutlined style={{ margin: 0, padding: 0 }} />
+          Refresh list
+        </Button>
       </div>
       <div className="py-2">
         <Table
