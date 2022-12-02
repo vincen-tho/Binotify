@@ -39,3 +39,7 @@ Web ini merupakan aplikasi web manajemen lagu dari subscription dari binotify ap
    <img src="src/screenshots/song.jpg" /><br>
 
 ## Detail Pembagian tugas
+
+Desain: 13520136, 13520093
+Implementasi: 13520093, 13520093
+Testing: 13520064
