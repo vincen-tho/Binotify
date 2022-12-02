@@ -6,10 +6,13 @@ import { ReloadOutlined } from "@ant-design/icons";
 
 const SubscriptionPage = () => {
   const [subscription, setSubscription] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchSubscriptionData = async () => {
+    setLoading(true);
     const response = await fetchSubscriptions();
     setSubscription(response);
+    setLoading(false);
   };
 
   const handleClick = async (record, approve) => {
@@ -44,19 +47,21 @@ const SubscriptionPage = () => {
       key: subData.creator_id + "-" + subData.subscriber_id,
       creator_id: subData.creator_id,
       subscriber_id: subData.subscriber_id,
+      creator_name: subData.creator_name,
+      subscriber_name: subData.subscriber_name,
     };
   });
 
   const columns = [
     {
       title: "Creator name",
-      dataIndex: "creator_id",
-      key: "creator_id",
+      dataIndex: "creator_name",
+      key: "creator_name",
     },
     {
       title: "Subscriber name",
-      dataIndex: "subscriber_id",
-      key: "subscriber_id",
+      dataIndex: "subscriber_name",
+      key: "subscriber_name",
     },
     {
       title: "ACTIONS",
@@ -88,6 +93,7 @@ const SubscriptionPage = () => {
       </div>
       <div className="py-2">
         <Table
+          loading={loading}
           dataSource={dataSource}
           columns={columns}
           pagination={{

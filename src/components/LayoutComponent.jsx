@@ -1,7 +1,5 @@
 import { Avatar, Button, Layout, Menu, Tooltip } from "antd";
-import { UserOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
 
 const { Header, Content, Sider } = Layout;
 

@@ -23,18 +23,9 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response.status === 440) {
-      if (!error440Flag) {
-        notification.error({
-          message: "Session expired",
-          description: "Please login again",
-        });
-      }
-
-      error440Flag = true;
-      setTimeout(() => {
-        window.location.replace("/logout");
-      }, 750);
-    }
+    notification.error({
+      message: "Error",
+      description: error,
+    });
   }
 );

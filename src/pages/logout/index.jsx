@@ -10,6 +10,7 @@ const LogoutPage = () => {
 
   useEffect(() => {
     reset();
+    localStorage.clear();
   }, []);
 
   if (!auth.isAuth) return <Navigate to="/" />;
