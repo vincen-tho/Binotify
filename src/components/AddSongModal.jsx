@@ -25,9 +25,13 @@ const AddSong = ({ handleAdd }) => {
         const formData = new FormData();
         formData.append("Judul", postData.Judul);
         formData.append("file", postData.file);
-        handleAdd(formData).then(() => {
-          setVisible(false);
-        });
+        handleAdd(formData)
+          .then(() => {
+            setVisible(false);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       });
     } else {
       notification.error({

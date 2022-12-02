@@ -34,7 +34,7 @@ const SongsPage = () => {
             notification.error({
               message: "Error",
               description:
-                "Failed to add song (Make sure file type is correct)",
+                "Failed to add song (make sure file type is correct)",
             });
             reject();
           } else {
@@ -49,7 +49,7 @@ const SongsPage = () => {
         .catch((err) => {
           notification.error({
             message: "Error",
-            description: err,
+            description: "Failed to add song (make sure file type is correct)",
           });
           reject(err);
         });

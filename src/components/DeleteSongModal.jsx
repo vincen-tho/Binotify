@@ -15,7 +15,9 @@ const DeleteSong = ({ dataRow, handleDelete }) => {
 
   const handleOk = async () => {
     handleDelete(dataRow.key).then(() => {
-      setVisible(false);
+      setVisible(false).catch((err) => {
+        console.log(err);
+      });
     });
   };
 

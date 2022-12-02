@@ -18,14 +18,14 @@ api.interceptors.request.use(
   }
 );
 
-api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    notification.error({
-      message: "Error",
-      description: error,
-    });
-  }
-);
+// api.interceptors.response.use(
+//   (response) => {
+//     return response;
+//   },
+//   (error) => {
+//     notification.error({
+//       message: "Error",
+//       description: error,
+//     });
+//   }
+// );

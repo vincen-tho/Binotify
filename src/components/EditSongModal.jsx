@@ -23,9 +23,13 @@ const EditSong = ({ dataRow, handleEdit }) => {
       const formData = new FormData();
       formData.append("Judul", postData.Judul);
       formData.append("file", postData.file);
-      handleEdit(dataRow.key, formData).then(() => {
-        setVisible(false);
-      });
+      handleEdit(dataRow.key, formData)
+        .then(() => {
+          setVisible(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     });
   };
 
