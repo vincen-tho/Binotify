@@ -34,9 +34,9 @@ Web ini merupakan aplikasi web manajemen lagu dari subscription dari binotify ap
 2. Register
    <img src="src/screenshots/register.jpg" /><br>
 3. Subscription Management Page
-   <img src="src/screenshots/subscription.jpg" /><br>
+   <img src="src/screenshots/Subscription.jpg" /><br>
 4. Song Management Page
-   <img src="src/screenshots/song.jpg" /><br>
+   <img src="src/screenshots/Song.jpg" /><br>
 
 ## Detail Pembagian tugas
 
